@@ -1,9 +1,14 @@
+### Golang ENV
+export GOPATH=$HOME/projects/golang
+export GOBIN=$GOPATH/bin
 #
 # If you come from bash you might have to change your $PATH.
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/lhnham/.oh-my-zsh
+
+eval "$(direnv hook zsh)"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -21,6 +26,7 @@ POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT_FOREGROUND="green"
 POWERLEVEL9K_COLOR_SCHEME='dark'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="╰─%B➤%b "
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='cyan'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -98,11 +104,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-### Golang ENV
-export GOPATH=$HOME/projects/golang
-export GOBIN=$GOPATH/bin
-
 
 ### Add some colors to manpage
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode
