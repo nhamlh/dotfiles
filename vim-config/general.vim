@@ -22,7 +22,7 @@ set history=2000
 " UI settings {{{
 " --------------------
 colorscheme solarized
-set background=light
+set background=dark
 
 " Highlight current line
 set cursorline

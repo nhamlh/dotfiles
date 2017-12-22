@@ -16,9 +16,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " personal wiki
 Plug 'vimwiki/vimwiki'
 
-" easily surround text
-Plug 'tpope/vim-surround'
-
 " insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
 
@@ -34,7 +31,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 
 " syntax checking
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-repeat'
@@ -80,6 +77,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 
 "Plug 'junegunn/vim-github-dashboard'
+
+Plug 'neomake/neomake'
 
 " Add plugins to &runtimepath
 call plug#end()
