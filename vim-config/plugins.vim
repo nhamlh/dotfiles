@@ -11,8 +11,8 @@ map <Leader>vp :VimuxPromptCommand<CR>
 "let wiki_1.path = '~/vimwiki'
 
 let g:vimwiki_list = [{
-  \ 'path': '~/gdrive/.vimwiki',
-  \ 'template_path': '~/gdrive/.vimwiki_html/assets',
+  \ 'path': '~/gdrive/vimwiki',
+  \ 'template_path': '~/gdrive/vimwiki_html/assets',
   \ 'template_default': 'default',
   \ 'template_ext': '.tpl'}]
 
@@ -26,7 +26,21 @@ let g:AutoPairsShortcutToggle = ''
 nmap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" deoplete {{{
+" --------------------
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_fixers = {
+\   'python': ['yapf'],
+\}
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 0
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 0
+" }}}
 
 " deoplete {{{
 " --------------------
@@ -134,3 +148,5 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 " }}}
+
+
