@@ -1,3 +1,4 @@
+" vim:foldmethod=marker:foldlevel=0
 
 " --------------------
 " Configuration and mappings for installed plugins
@@ -149,4 +150,5 @@ command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 " }}}
 
-
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>

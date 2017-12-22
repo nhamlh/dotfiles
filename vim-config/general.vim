@@ -1,3 +1,7 @@
+" vim:foldmethod=marker:foldlevel=0
+
+" Thanks to dougblack https://dougblack.io/words/a-good-vimrc.html for some of
+" below configurations
 
 " General settings {{{
 " --------------------
@@ -14,7 +18,12 @@ set virtualedit=block        " Position cursor anywhere in visual block
 set synmaxcol=1000           " Don't syntax highlight long lines
 set formatoptions+=1         " Don't break lines after a one-letter word
 set formatoptions-=t         " Don't auto-wrap text
+set lazyredraw               " Redraw only when we need to.
+set incsearch                " Search as characters are entered
 " }}}
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
 
 " History saving
 set history=2000
@@ -40,9 +49,11 @@ set relativenumber
 set number
 
 " Enable folding
-set foldmethod=indent
-set foldlevel=99
-" Enable folding with the spacebar
+set foldlevelstart=10        " open most folds by default
+set foldnestmax=10           " 10 nested fold max
+set foldmethod=indent        " fold based on indent level
+" Toggle folding with the spacebar
+nnoremap <space> za
 
 " Set tab
 set tabstop=2
@@ -56,5 +67,13 @@ set expandtab
 " Get efficient: shortcut mappings
 nnoremap ; :
 inoremap jk <Esc>
-nnoremap <space> za
+
+" move vertically by visual line
+" j/k won't skip over the "fake" part of the visual line in favor of the next "real" line
+nnoremap j gj
+nnoremap k gk
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
 " }}}

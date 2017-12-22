@@ -1,3 +1,5 @@
+" vim:foldmethod=marker:foldlevel=0
+
 " Author: Nham Le <lehoainham@gmail.com>
 " Date:   Oct 28 2017
 
