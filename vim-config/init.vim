@@ -32,7 +32,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 
 " syntax checking
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', {'tag': 'v1.7.0'}
 
 " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-repeat'
@@ -48,7 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
 " a code-completetion engine for vim
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'tag': '3.0', 'do': ':UpdateRemotePlugins' }
 
 " deoplete specific language support
 Plug 'zchee/deoplete-jedi'
@@ -57,7 +57,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " languages support
 Plug 'fatih/vim-go', { 'tag': 'v1.16' }
 
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'nsf/gocode', { 'tag': 'v.20170907', 'rtp': 'nvim', 'do': '~/.cfg/vim-config/plugins/gocode/nvim/symlink.sh' }
 
 "Plug 'python-mode/python-mode'
 
@@ -67,7 +67,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 Plug 'flazz/vim-colorschemes'
 
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
