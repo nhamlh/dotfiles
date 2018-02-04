@@ -79,8 +79,6 @@ Plug 'terryma/vim-multiple-cursors'
 
 "Plug 'junegunn/vim-github-dashboard'
 
-Plug 'neomake/neomake'
-
 " Easier to undo
 Plug 'sjl/gundo.vim'
 
