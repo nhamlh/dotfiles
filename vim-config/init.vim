@@ -55,7 +55,7 @@ Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " languages support
-Plug 'fatih/vim-go', { 'tag': 'v1.11' }
+Plug 'fatih/vim-go', { 'tag': 'v1.16' }
 
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
