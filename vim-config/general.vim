@@ -20,6 +20,7 @@ set formatoptions+=1         " Don't break lines after a one-letter word
 set formatoptions-=t         " Don't auto-wrap text
 set lazyredraw               " Redraw only when we need to.
 set incsearch                " Search as characters are entered
+set updatetime=100
 " }}}
 
 " turn off search highlight
