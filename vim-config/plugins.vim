@@ -27,7 +27,7 @@ let g:AutoPairsShortcutToggle = ''
 nmap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
-" deoplete {{{
+" ale {{{
 " --------------------
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_fixers = {
