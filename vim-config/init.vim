@@ -48,7 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
 " a code-completetion engine for vim
-Plug 'Shougo/deoplete.nvim', { 'tag': '3.0', 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
 
 " deoplete specific language support
 Plug 'zchee/deoplete-jedi'
