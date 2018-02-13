@@ -82,6 +82,12 @@ Plug 'terryma/vim-multiple-cursors'
 " Easier to undo
 Plug 'sjl/gundo.vim'
 
+" Simplify the transition between multiline and single-line code
+Plug 'AndrewRadev/splitjoin.vim', { 'tag': 'v0.8.0' }
+
+" snippets for kubernetes
+Plug 'andrewstuart/vim-kubernetes'
+
 " Add plugins to &runtimepath
 call plug#end()
 
