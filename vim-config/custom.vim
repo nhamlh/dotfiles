@@ -18,3 +18,10 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 " }}}
+
+" automatically close quickfix if it's the only open buffer
+" credit: https://stackoverflow.com/questions/7476126/how-to-automatically-close-the-quick-fix-window-when-leaving-a-file
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END
