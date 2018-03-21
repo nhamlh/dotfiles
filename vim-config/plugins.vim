@@ -165,3 +165,5 @@ let g:go_auto_sameids = 1
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
 " }}}
+
+let g:terraform_fmt_on_save = 1
