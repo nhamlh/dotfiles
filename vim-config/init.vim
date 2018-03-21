@@ -88,6 +88,9 @@ Plug 'AndrewRadev/splitjoin.vim', { 'tag': 'v0.8.0' }
 " snippets for kubernetes
 Plug 'andrewstuart/vim-kubernetes'
 
+" basic vim/terraform integration
+Plug 'hashivim/vim-terraform', { 'commit': '7679927' }
+
 " Add plugins to &runtimepath
 call plug#end()
 
