@@ -45,6 +45,7 @@ brew "openvpn"
 brew "ag"
 brew "openssh"
 brew "hugo"
+brew "kubectx"
 
 # Network utilities
 brew "knot-resolver" # proxy to run dns over tls (more info: https://phiffer.org/writing/dns-over-tls-on-macos/)
