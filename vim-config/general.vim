@@ -78,3 +78,6 @@ nnoremap k gk
 nnoremap gV `[v`]
 
 " }}}
+
+" remove trailing whitespace when saving buffer
+autocmd BufWritePre * %s/\s\+$//e
