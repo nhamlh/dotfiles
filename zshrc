@@ -70,7 +70,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions nhamle docker jsontools osx sublime web-search kubectl virtualenvwrapper)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions nhamle docker jsontools osx sublime web-search kubectl virtualenvwrapper safe-paste)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -120,3 +120,9 @@ bindkey '^ ' autosuggest-accept
 source ~/.oh-my-zsh/custom/plugins/zce.zsh/zce.zsh
 bindkey '^h' zce
 zstyle ':zce:*' bg 'fg=10'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
