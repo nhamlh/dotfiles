@@ -91,6 +91,9 @@ Plug 'andrewstuart/vim-kubernetes'
 " basic vim/terraform integration
 Plug 'hashivim/vim-terraform', { 'commit': '7679927' }
 
+" Dim inactive windows
+Plug 'blueyed/vim-diminactive'
+
 " Add plugins to &runtimepath
 call plug#end()
 
