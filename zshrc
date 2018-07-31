@@ -8,6 +8,18 @@ export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/lhnham/.oh-my-zsh
 
+_kube_get_ctx_ns() {
+  local ctx=$(kubectl config current-context)
+  local ns=$(kubectl config get-contexts \
+    | grep $ctx \
+    | awk '{print $5}'
+  )
+
+  [[ -z $ns ]] && ns="default"
+
+  echo "$ctx|$ns"
+}
+
 eval "$(direnv hook zsh)"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -19,7 +31,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir virtualenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time custom_kubectl_context)
 
-POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT='kubectl config current-context'
+POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT="_kube_get_ctx_ns"
 POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT_BACKGROUND="black"
 POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT_FOREGROUND="green"
 
