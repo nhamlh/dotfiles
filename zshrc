@@ -1,140 +1,80 @@
-### Golang ENV
-export GOPATH=$HOME/projects/golang
-export GOBIN=$GOPATH/bin
-#
-# If you come from bash you might have to change your $PATH.
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin
+source ~/.zplug/init.zsh
 
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/lhnham/.oh-my-zsh
+# install plugins which haven't been installed yet
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+      echo; zplug install
+  else
+      echo
+  fi
+fi
 
-_kube_get_ctx_ns() {
-  local ctx=$(kubectl config current-context)
-  local ns=$(kubectl config get-contexts \
-    | grep $ctx \
-    | awk '{print $5}'
-  )
-
-  [[ -z $ns ]] && ns="default"
-
-  echo "$ctx|$ns"
-}
-
-eval "$(direnv hook zsh)"
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+# Powerlevel9k configuration need to be set before zplug load otherwise it doesn't affect
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE='nerdfont-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir virtualenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time custom_kubectl_context)
-
-POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT="_kube_get_ctx_ns"
-POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT_BACKGROUND="black"
-POWERLEVEL9K_CUSTOM_KUBECTL_CONTEXT_FOREGROUND="green"
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time custom)
 
 POWERLEVEL9K_COLOR_SCHEME='dark'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%B➤%b "
 POWERLEVEL9K_VIRTUALENV_BACKGROUND='cyan'
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Misc plugins
+zplug "zdharma/fast-syntax-highlighting"
+zplug "djui/alias-tips"
+zplug "zlsun/solarized-man"
+zplug "seebi/dircolors-solarized"
+zplug "skx/sysadmin-util"
+zplug "zpm-zsh/ls"
+zplug "b4b4r07/enhancd", use:init.sh
+zplug "zsh-users/zsh-autosuggestions"
+zplug "dflemstr/rq", from:gh-r, as:command
+zplug "hlissner/zsh-autopair"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Git plugins
+zplug "Seinh/git-prune"
+zplug "mdumitru/git-aliases"
+zplug "voronkovich/gitignore.plugin.zsh"
+zplug "so-fancy/diff-so-fancy"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+zplug "junegunn/fzf", use:"shell/*.zsh"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Container related plugins
+zplug "Dbz/zsh-kubernetes"
+zplug "ahmetb/kubectx", use:kubectx, as:command
+zplug "ahmetb/kubectx", use:kubens, as:command
+zplug "webyneter/docker-aliases"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+zplug load
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+###
+### Environment variables
+###
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+export ENHANCD_FILTER="fzf"
+export ENHANCD_DOT_SHOW_FULLPATH=1
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="💡 Alias tip: "
+export ZSH_PLUGINS_ALIAS_TIPS_FORCE=1
+export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+###
+### Aliases
+###
+alias vi=nvim
+alias du="du -h"
+alias df="df -h"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions nhamle docker jsontools osx sublime web-search kubectl virtualenvwrapper safe-paste)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-### Add some colors to manpage
-export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode
-export LESS_TERMCAP_md=$(printf '\e[01;38;5;75m') # enter double-bright mode
-export LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)
-export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
-export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode
-export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
-export LESS_TERMCAP_us=$(printf '\e[04;38;5;200m') # enter underline mode
-
+###
+### Keybindings
+###
 bindkey '^ ' autosuggest-accept
-
-# easymotion for zsh
-source ~/.oh-my-zsh/custom/plugins/zce.zsh/zce.zsh
-bindkey '^h' zce
-zstyle ':zce:*' bg 'fg=10'
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lhnham/mydrive/devel/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
