@@ -1,3 +1,5 @@
+export TERM=xterm-256color
+
 source ~/.zplug/init.zsh
 
 # install plugins which haven't been installed yet
@@ -55,17 +57,20 @@ zplug load
 ###
 ### Environment variables
 ###
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
 
-export ENHANCD_FILTER="fzf"
-export ENHANCD_DOT_SHOW_FULLPATH=1
+ENHANCD_FILTER="fzf"
+ENHANCD_DOT_SHOW_FULLPATH=1
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT="💡 Alias tip: "
 export ZSH_PLUGINS_ALIAS_TIPS_FORCE=1
-export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
+ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
+
+EDITOR=nvim
+WORDCHARS='' # Make M-f and M-b work better for me
 
 ###
 ### Aliases
@@ -75,6 +80,12 @@ alias du="du -h"
 alias df="df -h"
 
 ###
-### Keybindings
+### Configurations
 ###
+
 bindkey '^ ' autosuggest-accept
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
