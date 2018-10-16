@@ -25,7 +25,7 @@ let g:AutoPairsShortcutToggle = ''
 
 " require brew install ctags
 nmap <silent> <F8> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
 " ale {{{
 " --------------------
