@@ -1,101 +1,179 @@
 " vim:foldmethod=marker:foldlevel=0
 
-call plug#begin('~/.cfg/vim-config/plugins')
+" Author: Nham Le <lehoainham@gmail.com>
+" Date:   Oct 28 2017
 
-" more text objects
-Plug 'wellle/targets.vim'
+" Requirements: need to install vim-plug first to load plugins
+" Inspired by https://github.com/rafi/vim-config
 
-" run shell command inside vim
-Plug 'benmills/vimux'
 
-" Plugin for editing salt file
-Plug 'saltstack/salt-vim'
+"-----------------------------------------------------------
+" General settings
+"-----------------------------------------------------------
+" {{{
+" Thanks to dougblack https://dougblack.io/words/a-good-vimrc.html for some of
+" below configurations
 
-" seamlessly split navigation between vim and tmux
-Plug 'christoomey/vim-tmux-navigator'
+syntax on
+filetype plugin indent on
+set nocompatible
+let mapleader=','            " remapping leader key to ,
+let maplocalleader='-'       " remapping leader key to ,
+set mouse=nv                 " Disable mouse in command-line mode
+set modeline                 " automatically setting options from modelines
+set fileformats=unix,dos,mac " Use Unix as the standard file type
+set magic                    " For regular expressions turn magic on
+set virtualedit=block        " Position cursor anywhere in visual block
+set synmaxcol=1000           " Don't syntax highlight long lines
+set formatoptions+=1         " Don't break lines after a one-letter word
+set formatoptions-=t         " Don't auto-wrap text
+set lazyredraw               " Redraw only when we need to.
+set incsearch                " Search as characters are entered
+set history=2000             " History saving
+set updatetime=100
+"set termguicolors
+" }}}
 
-" personal wiki
-Plug 'vimwiki/vimwiki'
+"-----------------------------------------------------------
+" Install and configure plugins
+"-----------------------------------------------------------
+" FIXME: Shouldn't use hardcore path
+source ~/.cfg/vim-config/plugins.vim
 
-" insert or delete brackets, parens, quotes in pair
-Plug 'jiangmiao/auto-pairs'
+"-----------------------------------------------------------
+" Appearance
+"-----------------------------------------------------------
+" {{{
+"colorscheme solarized
+colorscheme NeoSolarized
+set background=dark
 
-" intensely orgasmic commenting
-Plug 'scrooloose/nerdcommenter'
+" Highlight current line
+set cursorline
+highlight CursorLine cterm=underline ctermbg=None ctermfg=None
 
-" Display the indention levels with thin vertical lines
-Plug 'Yggdroot/indentLine'
+" Show hidden characters
+set list
+set listchars=tab:▸·,eol:¬,trail:·
 
-Plug 'majutsushi/tagbar'
+" Disable list chars on golang files
+autocmd FileType go set nolist
 
-" Perform all your vim insert mode completions with tab
-Plug 'ervandew/supertab'
+" Display line number
+set relativenumber
+set number
 
-" syntax checking
-Plug 'w0rp/ale', {'tag': 'v1.7.0'}
+" Enable folding
+set foldlevelstart=10        " open most folds by default
+set foldnestmax=10           " 10 nested fold max
+set foldmethod=indent        " fold based on indent level
 
-" enable repeating supported plugin maps with '.'
-Plug 'tpope/vim-repeat'
+" Set tab
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" }}}
 
-" gitk for vim
-Plug 'gregsexton/gitv'
+"-----------------------------------------------------------
+" Mapping
+"-----------------------------------------------------------
+" {{{
 
-" git wrapper
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Get efficient: shortcut mappings
+nnoremap ; :
+inoremap jk <Esc>
 
-" quoting/paranthesizing made simble
-Plug 'tpope/vim-surround'
+" move vertically by visual line
+" j/k won't skip over the "fake" part of the visual line in favor of the next "real" line
+nnoremap j gj
+nnoremap k gk
 
-" a code-completetion engine for vim
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
+" highlight last inserted text
+nnoremap gV `[v`]
 
-" deoplete specific language support
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Quickly replace selected text
+map ,g :s/<C-R><C-W>/
+" Quickly replace the word at the cursor
+map ,G :s/<C-R>"/
 
-" languages support
-Plug 'fatih/vim-go', { 'tag': 'v1.16' }
+" Quickly working on buffers
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <c-l> :bnext<CR>
+nnoremap <c-h> :bprevious<CR>
+" strange <c-h> behavior in nvim
+if has('nvim')
+  nnoremap <BS> :bprevious<CR>
+else
+  nnoremap <c-h> :bprevious<CR>
+endif
 
-Plug 'nsf/gocode', { 'tag': 'v.20170907', 'rtp': 'nvim', 'do': '~/.cfg/vim-config/plugins/gocode/nvim/symlink.sh' }
+" Quickly copy to/paste from system clipboard
+vnoremap Y "+y
+vnoremap P "+p
 
-"Plug 'python-mode/python-mode'
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
 
-Plug 'junegunn/vim-easy-align'
+" Quickly jump to errors indicated in quickfix window
+nnoremap ef :cnf<CR>
+nnoremap en :cnext<CR>
+nnoremap el :clast<CR>
+nnoremap ep :cprevious<CR>
 
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Toggle folding with the spacebar
+nnoremap <space> za
 
-Plug 'flazz/vim-colorschemes'
+" }}}
 
-Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
-Plug 'vim-airline/vim-airline-themes'
+"-----------------------------------------------------------
+" Misc
+"-----------------------------------------------------------
+" {{{
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" python with virtualenv support {{{
+py << PYCODE
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+PYCODE
+" }}}
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'easymotion/vim-easymotion'
+" automatically close quickfix if it's the only open buffer
+" credit: https://stackoverflow.com/questions/7476126/how-to-automatically-close-the-quick-fix-window-when-leaving-a-file
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END
 
-Plug 'terryma/vim-multiple-cursors'
+" Ignore quickfix when listing or navigating between buffers
+augroup qf
+  autocmd!
+  autocmd FileType qf set nobuflisted
+augroup END
 
-"Plug 'junegunn/vim-github-dashboard'
+" Remove trailing whitespace when saving buffer
+autocmd BufWritePre * %s/\s\+$//e
 
-" Easier to undo
-Plug 'sjl/gundo.vim'
+" Toggle quickfix window {{{
+fun! s:QuickfixToggle()
+  let nr = winnr("$")
+  cwindow
+  let nr2 = winnr("$")
+  if nr == nr2
+    cclose
+  endif
+endfunction
 
-" Simplify the transition between multiline and single-line code
-Plug 'AndrewRadev/splitjoin.vim', { 'tag': 'v0.8.0' }
+nnoremap <silent> <M-q> :call <SID>QuickfixToggle()<CR>
+" }}}
 
-" snippets for kubernetes
-Plug 'andrewstuart/vim-kubernetes'
+" Quickfix always occupy full width at the bottom
+au FileType qf wincmd J
 
-" basic vim/terraform integration
-Plug 'hashivim/vim-terraform', { 'commit': '7679927' }
+" auto resize panes when vim windows is resized (like tmux zoom in)
+autocmd VimResized * wincmd =
 
-" Dim inactive windows
-Plug 'blueyed/vim-diminactive'
-
-Plug 'KabbAmine/zeavim.vim'
-
-" Add plugins to &runtimepath
-call plug#end()
-
+" }}}
