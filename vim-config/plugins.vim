@@ -16,6 +16,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
 Plug 'vim-airline/vim-airline-themes'
+  let g:airline_theme='powerlineish'
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#buffer_nr_show = 1
 
 Plug 'blueyed/vim-diminactive'
   let g:diminactive_enable_focus = 1
@@ -59,11 +63,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-j>"
   let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-  let g:airline_theme='powerlineish'
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_nr_show = 1
 
 Plug 'jiangmiao/auto-pairs'
   let g:AutoPairsFlyMode = 1
