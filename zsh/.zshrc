@@ -171,8 +171,10 @@ export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Setup rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*) source $src
-
-eval "$(rbenv init -)"
 
