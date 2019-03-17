@@ -4,7 +4,7 @@
 
 Clone this repository
 ```bash
-git clone https://github.com/nhamlh/dotfiles $HOME/.dotfiles
+git clone https://github.com/nhamlh/dotfiles $HOME/.dotfiles && cd $HOME/.dotfiles
 ```
 
 Install [GNU stow](https://www.gnu.org/software/stow/)
