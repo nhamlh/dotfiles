@@ -1,9 +1,0 @@
-bash ~/.screenlayout/posiba.sh
-nm-applet &
-#xfce4-panel &
-tint2 &
-xscreensaver -nosplash &
-~/.dropbox-dist/dropboxd &
-feh --bg-fill ~/.wallpaper/wallpaper.jpg &
-volumeicon &
-fcitx &

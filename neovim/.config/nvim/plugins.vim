@@ -13,8 +13,7 @@ Plug 'ryanoasis/vim-devicons'
   let g:webdevicons_enable_airline_statusline = 1
   let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   let g:airline_theme='powerlineish'
   let g:airline_powerline_fonts = 1
@@ -25,12 +24,18 @@ Plug 'blueyed/vim-diminactive'
   let g:diminactive_enable_focus = 1
   let g:diminactive_use_syntax = 0
 
+"Plug 'roman/golden-ratio'
+"  let g:golden_ratio_exclude_nonmodifiable = 1
+
 "-----------------------------------------------------------
 " programming languages support
 "-----------------------------------------------------------
 Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/rainbow-end'
+Plug 'luochen1990/rainbow'
+  let g:rainbow_active = 1
 
-Plug 'w0rp/ale', {'tag': 'v2.2.0'}
+Plug 'w0rp/ale'
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
   let g:ale_fixers = {
   \   'python': ['yapf'],
@@ -49,7 +54,7 @@ Plug 'w0rp/ale', {'tag': 'v2.2.0'}
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
 
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.0', 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
   " Use smartcase
   let g:deoplete#enable_smart_case = 1
@@ -57,12 +62,14 @@ Plug 'Shougo/deoplete.nvim', { 'tag': '4.0', 'do': ':UpdateRemotePlugins' }
   let g:deoplete#sources#go#gocode_binary = "$GOBIN/gocode"
 
 Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+"Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-j>"
   let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+Plug 'sebosp/vim-snippets-terraform'
 
 Plug 'jiangmiao/auto-pairs'
   let g:AutoPairsFlyMode = 1
@@ -74,30 +81,39 @@ Plug 'janko-m/vim-test'
   let test#strategy = "dispatch"
 
 Plug 'scrooloose/nerdcommenter'
+  "let g:NERDCreateDefaultMappings = 0
+  "let g:NERDToggleCheckAllLines = 1
 Plug 'Yggdroot/indentLine'
 
 Plug 'majutsushi/tagbar'
   nmap <silent> <F8> :TagbarToggle<CR>
   let g:tagbar_ctags_bin = '/usr/bin/ctags'
+  let g:tagbar_sort = 0
+  let g:tagbar_width = 30
 
 Plug 'junegunn/vim-easy-align'
 
-Plug 'fatih/vim-go', { 'tag': 'v1.16' }
-  let g:go_fmt_command = "goimports"
+"Plug 'fatih/vim-go', { 'tag': 'v1.16' }
+"  let g:go_fmt_command = "goimports"
+"  let g:go_auto_type_info = 1
+"  let g:go_auto_sameids = 1
+"  "let g:go_def_mode = 'godef'
+"  "let g:go_def_mapping_enabled = 1
+
+"  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+"  nnoremap <leader>gb :GoBuild<CR>
+"  nnoremap <leader>gr :GoRun<CR>
+
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.cfg/vim-config/plugins/gocode/nvim/symlink.sh' }
+Plug 'hashivim/vim-terraform'
   let g:terraform_fmt_on_save = 1
-  let g:go_auto_type_info = 1
-  let g:go_auto_sameids = 1
-  "let g:go_def_mode = 'godef'
-  "let g:go_def_mapping_enabled = 1
+  let g:terraform_fold_sections=1
+  let g:terraform_remap_spacebar=1
 
-  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-  nnoremap <leader>gb :GoBuild<CR>
-  nnoremap <leader>gr :GoRun<CR>
-
-Plug 'nsf/gocode', { 'tag': 'v.20170907', 'rtp': 'nvim', 'do': '~/.cfg/vim-config/plugins/gocode/nvim/symlink.sh' }
-Plug 'hashivim/vim-terraform', { 'commit': '7679927' }
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'sheerun/vim-polyglot'
+
+Plug 'pedrohdz/vim-yaml-folds'
 
 "-----------------------------------------------------------
 " git
@@ -139,7 +155,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  map <C-n> :NERDTreeToggle<CR>
+  nnoremap <C-n> :NERDTreeToggle<CR>
+  inoremap <C-n> <Esc>:NERDTreeToggle<CR>
   " close vim if the only window left open is a NERDTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -164,9 +181,11 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
   endfunction
 
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-  let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules -f .git/tags'
+  let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules'
   "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
   nnoremap \ :Ag<CR>
@@ -176,6 +195,7 @@ Plug 'junegunn/fzf.vim'
   nnoremap <Leader>t :BTags<CR>
   nnoremap <Leader>T :Tags<CR>
   nnoremap <Leader>b :Buffers<CR>
+  nnoremap <Leader>x :Commands<CR>
 
   nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
   "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -183,12 +203,10 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
   let g:EasyMotion_do_mapping = 0
-  " one keystroke
-  nmap s <Plug>(easymotion-overwin-f)
-  " two keystroke:
-  "nmap s <Plug>(easymotion-overwin-f2)
-
   let g:EasyMotion_smartcase = 1
+
+  " quick character navigating
+  nmap s <Plug>(easymotion-overwin-f)
 
   " quick line navigating
   map <Leader>j <Plug>(easymotion-j)
@@ -201,7 +219,7 @@ Plug 'terryma/vim-multiple-cursors'
   let g:multi_cursor_skip_key='<C-x>'
   let g:multi_cursor_quit_key='<Esc>'
 
-Plug 'AndrewRadev/splitjoin.vim', { 'tag': 'v0.8.0' }
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'brooth/far.vim'
 "Plug 'roxma/vim-tmux-clipboard'

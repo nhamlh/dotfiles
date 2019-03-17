@@ -1,16 +1,18 @@
 # My dotfiles
 
-Many pieces of this repository was stolen from these awesome guys:
-
-- https://github.com/gfarrell/dotfiles
-- https://github.com/paulirish/dotfiles
-
 ## Installation
 
-```
-git clone https://github.com/nhamlh/dotfiles ~/.cfg \
-&& cd ~/.cfg \
-&& make init
+Clone this repository
+```bash
+git clone https://github.com/nhamlh/dotfiles $HOME/.dotfiles
 ```
 
+Install [GNU stow](https://www.gnu.org/software/stow/)
+```bash
+pacman -S stow
+```
 
+Symlink component you want. E.g I want to symlink my neovim config:
+```bash
+stow neovim
+```
