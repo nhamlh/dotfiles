@@ -189,6 +189,7 @@ exec nm-applet
 exec feh --bg-fill ~/.config/i3/wallpapers/goldengatebridge.jpg
 exec eval $(ssh-agent -s)
 exec redshift
+exec compton -b --config ~/.config/compton.conf
 
 # quickly start a application
 bindsym $mod+Return exec xfce4-terminal
@@ -204,7 +205,7 @@ bindsym $mod+g $HOME/.config/i3/rofi/github_repos.rb
 bindsym $mod+r exec --no-startup-id i3-dmenu-desktop
 
 # lock screen
-bindsym $mod+n exec i3lock -c 000000 -e
+bindsym $mod+n ~/.config/i3/lock.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
