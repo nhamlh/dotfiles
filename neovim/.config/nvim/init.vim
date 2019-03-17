@@ -37,8 +37,7 @@ set updatetime=100
 "-----------------------------------------------------------
 " Install and configure plugins
 "-----------------------------------------------------------
-" FIXME: Shouldn't use hardcore path
-source ~/.cfg/vim-config/plugins.vim
+source ~/.config/nvim/plugins.vim
 
 "-----------------------------------------------------------
 " Appearance
