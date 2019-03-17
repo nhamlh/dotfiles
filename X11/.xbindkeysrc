@@ -10,3 +10,13 @@
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
    XF86AudioMute
 
+# Increase brightness
+"xbacklight -inc 10; notify-send 'brightness up'"
+   XF86MonBrightnessUp
+
+# Decrease brightness
+"xbacklight -dec 10; notify-send 'brightness down'"
+   XF86MonBrightnessDown
+
+"autorandr -c"
+  F7
