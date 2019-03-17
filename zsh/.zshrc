@@ -174,9 +174,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*) source $src
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/nhamlh/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/nhamlh/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+eval "$(rbenv init -)"
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/nhamlh/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/nhamlh/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
