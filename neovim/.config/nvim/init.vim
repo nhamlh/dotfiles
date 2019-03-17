@@ -123,6 +123,9 @@ nnoremap ep :cprevious<CR>
 " Toggle folding with the spacebar
 nnoremap <space> za
 
+nnoremap <c-o>h :split<CR>
+nnoremap <c-o>v :vsplit<CR>
+
 " }}}
 
 "-----------------------------------------------------------
