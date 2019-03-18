@@ -223,6 +223,7 @@ exec_always --no-startup-id eval $(ssh-agent -s)
 exec_always --no-startup-id compton -b --config ~/.config/compton.conf
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id redshift
+exec_always --no-startup-id emacs --daemon
 
 # quickly start a application
 bindsym $mod+Return exec xfce4-terminal

@@ -148,6 +148,7 @@ alias eio="exercism"
 alias tf="terraform"
 alias ktx="kubectx"
 alias kns="kns"
+alias em='emacsclient -create-frame --alternate-editor=""'
 
 ###
 ### Configurations
