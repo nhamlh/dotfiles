@@ -15,7 +15,7 @@ fzf-open-file() {
 zle     -N   fzf-open-file
 bindkey '^J' fzf-open-file
 
-# Quickly spawn readonly psql session to employment-hero mainapp database
+# Quickly spawn a psql session
 dbsession () {
   readonly local DB_HOST=${DB_HOST}
   readonly local DB_USER=${DB_USER}
