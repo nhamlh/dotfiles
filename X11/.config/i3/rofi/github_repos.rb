@@ -3,8 +3,7 @@
 require 'octokit'
 require 'lightly'
 
-IDENTITY = 'Thinkei'.freeze
-TOKEN = '43e5252512c7c7a1d1392e7e787227a8f656a850'.freeze
+TOKEN = 'xxx'.freeze
 
 client = Octokit::Client.new(access_token: TOKEN, auto_paginate: true)
 
