@@ -20,3 +20,7 @@
 
 "autorandr -c"
   F7
+
+# Take screenshot, meanwhile copy it to clipboard
+"gscreenshot-cli -s -c -f ~/Screenshots/"
+  F3
