@@ -232,7 +232,7 @@ bindsym $mod+r exec --no-startup-id rofi -show run
 bindsym $mod+g $HOME/.config/i3/rofi/github_repos.rb
 
 # lock screen
-bindsym $mod+n ~/.config/i3/lock.sh
+bindsym $mod+n exec --no-startup-id ~/.config/i3/lock.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
