@@ -36,6 +36,7 @@ zplug "b4b4r07/enhancd", use:init.sh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "dflemstr/rq", from:gh-r, as:command
 zplug "hlissner/zsh-autopair"
+zplug "timvisee/ffsend", from:gh-r, as:command, use:"*-linux-x64", rename-to:ffsend
 
 # Git plugins
 zplug "Seinh/git-prune"
@@ -149,6 +150,7 @@ alias tf="terraform"
 alias ktx="kubectx"
 alias kns="kns"
 alias em='emacsclient -create-frame --alternate-editor=""'
+alias u="ffsend upload --copy"
 
 ###
 ### Configurations
