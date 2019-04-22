@@ -229,7 +229,7 @@ exec_always --no-startup-id emacs --daemon
 bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+b exec firefox
 bindsym $mod+r exec --no-startup-id rofi -show run
-bindsym $mod+g $HOME/.config/i3/rofi/github_repos.rb
+bindsym $mod+g exec $HOME/.config/i3/rofi/rofi.rb github
 
 # lock screen
 bindsym $mod+n exec --no-startup-id ~/.config/i3/lock.sh
