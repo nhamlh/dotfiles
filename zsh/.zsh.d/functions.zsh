@@ -29,10 +29,25 @@ dbsession () {
 
 function mkcd() {
   local _ARV="$@"
-  mkdir $_ARV || return 2
+  mkdir -p $_ARV || return 2
 
-  # I use enhanced cd, so it need to be disabled
-  unalias cd 2> /dev/null
-  cd $_ARV
+  builtin cd $_ARV
 }
 
+# Create a file/folder under /tmp if not exist
+# Jump to folder or open file with EDITOR
+function tmp() {
+  while (( $# )); do
+    case "$1" in
+    "-d")
+      mkdir "/tmp/$2" 2> /dev/null
+      cd "/tmp/$2"
+      shift
+      shift
+      ;;
+    *)
+      $EDITOR "/tmp/$1"
+      shift
+    esac
+  done
+}

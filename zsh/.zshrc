@@ -18,7 +18,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE='nerdfont-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir virtualenv rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time custom)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time custom)
 
 POWERLEVEL9K_COLOR_SCHEME='dark'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -148,9 +148,10 @@ alias dig="dig +short"
 alias eio="exercism"
 alias tf="terraform"
 alias ktx="kubectx"
-alias kns="kns"
+alias kns="kubens"
 alias em='emacsclient -create-frame --alternate-editor=""'
 alias u="ffsend upload --copy"
+alias dc="docker-compose"
 
 ###
 ### Configurations
