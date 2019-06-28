@@ -228,8 +228,9 @@ exec_always --no-startup-id emacs --daemon
 # quickly start a application
 bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+b exec firefox
-bindsym $mod+r exec --no-startup-id rofi -show run
+bindsym $mod+r exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+g exec $HOME/.config/i3/rofi/rofi.rb github
+bindsym $mod+c exec $HOME/.config/i3/rofi/rofi.rb circleci
 
 # lock screen
 bindsym $mod+n exec --no-startup-id ~/.config/i3/lock.sh
