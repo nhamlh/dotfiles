@@ -13,12 +13,22 @@ Plug 'ryanoasis/vim-devicons'
   let g:webdevicons_enable_airline_statusline = 1
   let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme='powerlineish'
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_nr_show = 1
+Plug 'itchyny/vim-gitbranch'
+Plug 'itchyny/lightline.vim'
+  set noshowmode
+  let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste'  ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified'  ] ]
+        \
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'fugitive#head'
+        \
+        \ },
+        \
+        \ }
 
 Plug 'blueyed/vim-diminactive'
   let g:diminactive_enable_focus = 1
@@ -47,22 +57,30 @@ Plug 'w0rp/ale'
   let g:ale_lint_on_enter = 1
   let g:ale_set_quickfix = 1
   let g:ale_set_loclist = 0
-  let g:ale_open_list = 1
+  let g:ale_open_list = 0
   let g:ale_keep_list_window_open = 0
   let g:ale_python_flake8_options = '--ignore=E501'
 
   let g:ale_completion_enabled = 1
   let g:ale_fix_on_save = 1
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-  " Use smartcase
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#auto_completion_start_length = 1
-  let g:deoplete#sources#go#gocode_binary = "$GOBIN/gocode"
+" LSP
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
 
-Plug 'zchee/deoplete-jedi'
-"Plug 'zchee/deoplete-go', { 'do': 'make'}
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   let g:UltiSnipsExpandTrigger="<tab>"
@@ -82,8 +100,11 @@ Plug 'janko-m/vim-test'
 
 Plug 'scrooloose/nerdcommenter'
   "let g:NERDCreateDefaultMappings = 0
-  "let g:NERDToggleCheckAllLines = 1
+  let g:NERDToggleCheckAllLines = 1
+  let g:NERDDefaultAlign = 'left'
 Plug 'Yggdroot/indentLine'
+
+Plug 'craigemery/vim-autotag'
 
 Plug 'majutsushi/tagbar'
   nmap <silent> <F8> :TagbarToggle<CR>
@@ -92,6 +113,8 @@ Plug 'majutsushi/tagbar'
   let g:tagbar_width = 30
 
 Plug 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
 
 "Plug 'fatih/vim-go', { 'tag': 'v1.16' }
 "  let g:go_fmt_command = "goimports"
@@ -106,7 +129,7 @@ Plug 'junegunn/vim-easy-align'
 
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.cfg/vim-config/plugins/gocode/nvim/symlink.sh' }
 Plug 'hashivim/vim-terraform'
-  let g:terraform_fmt_on_save = 1
+  let g:terraform_fmt_on_save = 0
   let g:terraform_fold_sections=1
   let g:terraform_remap_spacebar=1
 
@@ -118,11 +141,11 @@ Plug 'pedrohdz/vim-yaml-folds'
 "-----------------------------------------------------------
 " git
 "-----------------------------------------------------------
-Plug 'gregsexton/gitv'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
+  let g:signify_sign_change = '~'
+
 Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
-Plug 'junegunn/gv.vim'
 "Plug 'chrisbra/vim-diff-enhanced'
 
 "-----------------------------------------------------------
@@ -194,8 +217,8 @@ Plug 'junegunn/fzf.vim'
   nnoremap <Leader>L :Lines<CR>
   nnoremap <Leader>t :BTags<CR>
   nnoremap <Leader>T :Tags<CR>
-  nnoremap <Leader>b :Buffers<CR>
-  nnoremap <Leader>x :Commands<CR>
+  nnoremap <Leader>bb :Buffers<CR>
+  nnoremap <M-x> :Commands<CR>
 
   nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
   "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -233,6 +256,13 @@ Plug 'sjl/gundo.vim'
   let g:gundo_close_on_revert = 1
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
+
+Plug 'dhruvasagar/vim-zoom'
+  nmap <c-o>z <Plug>(zoom-toggle)
+
+Plug '~/.config/nvim/plugins/diffchanges'
+
+Plug 'iamcco/markdown-preview.nvim'
 
 " Add plugins to &runtimepath
 call plug#end()
