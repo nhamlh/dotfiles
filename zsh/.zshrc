@@ -161,6 +161,8 @@ bindkey -e # Use emacs input mode
 bindkey '^ ' autosuggest-accept
 bindkey '\C-h' backward-delete-word
 
+eval $(direnv export zsh)
+
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
