@@ -12,8 +12,25 @@ fzf-open-file() {
   zle fzf-redraw-prompt
   return $ret
 }
-zle     -N   fzf-open-file
-bindkey '^J' fzf-open-file
+#zle     -N   fzf-open-file
+#bindkey '^J' fzf-open-file
+
+fzf-select-tmux-window() {
+  local cmd="tmux list-windows | awk -F' ' '{print $1\" \"$2}'"
+  setopt localoptions pipefail 2> /dev/null
+  local chosen="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_J_OPTS" $(__fzfcmd) +m)"
+  if [[ -z "$chosen" ]]; then
+    zle redisplay
+    return 0
+  fi
+
+  local window_num=$(awk -F' ' '{print $1}')
+  tmux select-window  $window_num
+
+  local ret=$?
+  zle fzf-redraw-prompt
+  return $ret
+}
 
 # Quickly spawn a psql session
 dbsession () {
@@ -50,4 +67,18 @@ function tmp() {
       shift
     esac
   done
+}
+
+# Quickly boostrap a dev environment
+function dev() {
+  tmux_panes=$(tmux list-panes | wc -l)
+
+  if ! [[ $tmux_panes -eq 1 ]]; then
+    tmux new-window
+  fi
+
+  tmux rename-window $(basename $PWD)
+  tmux split-pane -l 12
+  tmux send-key -t 0 "vi" Enter
+  tmux select-pane -t 0
 }

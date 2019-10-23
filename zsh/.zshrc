@@ -1,20 +1,24 @@
 export TERM=xterm-256color
+export ZSH_CACHE_DIR="/tmp"
 
-source ~/.zplug/init.zsh
-
-# install plugins which haven't been installed yet
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-      echo; zplug install
-  else
-      echo
-  fi
+# Install zplugin if not installed
+if [ ! -d "${HOME}/.zplugin" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 fi
 
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-# Powerlevel9k configuration need to be set before zplug load otherwise it doesn't affect
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# Load zplugin
+source ~/.zplugin/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+
+# Functions to make configuration less verbose
+zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
+zi() { zplugin ice lucid                            "${@}"; } # Regular Ice
+z()  { [ -z $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
+
+# Prompt settings
+zi src"powerlevel10k.zsh-theme"; z romkatv/powerlevel10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE='nerdfont-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir virtualenv rbenv vcs)
@@ -25,36 +29,34 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%B➤%b "
 POWERLEVEL9K_VIRTUALENV_BACKGROUND='cyan'
 
+#zi pick"async.zsh" src"pure.zsh"; z "sindresorhus/pure"
+
 # Misc plugins
-zplug "zdharma/fast-syntax-highlighting"
-zplug "djui/alias-tips"
-zplug "zlsun/solarized-man"
-zplug "joel-porquet/zsh-dircolors-solarized"
-zplug "skx/sysadmin-util"
-zplug "zpm-zsh/ls"
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "zsh-users/zsh-autosuggestions"
-zplug "dflemstr/rq", from:gh-r, as:command
-zplug "hlissner/zsh-autopair"
-zplug "timvisee/ffsend", from:gh-r, as:command, use:"*-linux-x64", rename-to:ffsend
+zt 0b; z "zdharma/fast-syntax-highlighting"
+zt 0b; z "djui/alias-tips"
+zt 0b; z "zlsun/solarized-man"
+zt 0b; z "joel-porquet/zsh-dircolors-solarized"
+zt 0b; z "skx/sysadmin-util"
+zt 0b; z "zpm-zsh/ls"
+z "zsh-users/zsh-autosuggestions"
+zt 0b; z "hlissner/zsh-autopair"
+zt 0b src"init.sh"; z "b4b4r07/enhancd"
+zt 0b from"gh-r" as"program"; z "dflemstr/rq"
+zt 0b from"gh-r" pick"*-linux-x64" mv"ffsend-* -> ffsend" as"program";z "timvisee/ffsend"
+zt 0b multisrc"asdf.sh completions/asdf.bash";z "asdf-vm/asdf"
 
 # Git plugins
-zplug "Seinh/git-prune"
-zplug "mdumitru/git-aliases"
-zplug "voronkovich/gitignore.plugin.zsh"
-zplug "so-fancy/diff-so-fancy"
+zt 0b; z "Seinh/git-prune"
+z snippet "OMZ::lib/git.zsh"; z "mdumitru/git-aliases"
+zt 0b; z "voronkovich/gitignore.plugin.zsh"
+zt 0b pick"diff-so-fancy" as"program"; z "so-fancy/diff-so-fancy"
+zt 0b from"gh-r" mv"fzf-* -> fzf" as"program"; z "junegunn/fzf-bin"
+zt 0b pick"shell/*.zsh"; z "junegunn/fzf"
 
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
-zplug "junegunn/fzf", use:"shell/*.zsh"
-
-# Container related plugins
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "ahmetb/kubectx", use:kubectx, as:command
-zplug "ahmetb/kubectx", use:kubens, as:command
-zplug "webyneter/docker-aliases"
-
-zplug load
-
+## Container related plugins
+z snippet "OMZ::plugins/kubectl/kubectl.plugin.zsh"
+zt 0b; z "webyneter/docker-aliases"
+zt 0b pick"kube*" as"program"; z "ahmetb/kubectx"
 
 ###
 ### FZF configuration
@@ -129,10 +131,6 @@ export ZSH_PLUGINS_ALIAS_TIPS_TEXT="💡 Alias tip: "
 export ZSH_PLUGINS_ALIAS_TIPS_FORCE=1
 ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 export EDITOR=nvim
 export WORDCHARS=''               # Make M-f and M-b work better for me
 export EXTENDEDGLOB=1             # globbing
@@ -152,6 +150,7 @@ alias kns="kubens"
 alias em='emacsclient -create-frame --alternate-editor=""'
 alias u="ffsend upload --copy"
 alias dc="docker-compose"
+alias a="asdf"
 
 ###
 ### Configurations
@@ -176,10 +175,6 @@ setopt interactivecomments
 export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Setup rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*) source $src
