@@ -22,5 +22,6 @@
   F7
 
 # Take screenshot, meanwhile copy it to clipboard
-"gscreenshot-cli -s -c -f ~/Screenshots/"
+"scrot -s -f -e 'xclip -i $f -selection clipboard -t image/png' ~/Screenshots/screenshot-%Y-%m-%d_$wx$h.png"
   F3
+
