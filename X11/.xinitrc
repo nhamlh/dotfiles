@@ -43,6 +43,8 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 fcitx &
 
+export WINIT_HIDPI_FACTOR="1.66"
+
 #export GDK_SCALE=2
 #export GDK_DPI_SCALE=2
 
@@ -52,7 +54,7 @@ eval $(ssh-agent)
 
 # increase keyboard auto repeat rate
 # See https://unix.stackexchange.com/questions/58651/adjusting-keyboard-sensitivity-in-a-command-line-terminal
-#xset r rate 200 70
+xset r rate 150 100
 
 #exec awesome
 exec i3
