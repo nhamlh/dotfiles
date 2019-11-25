@@ -203,19 +203,19 @@ bar {
 ################################################
 
 # startup applications
+exec        --no-startup-id redshift
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/goldengatebridge.jpg
 exec_always --no-startup-id eval $(ssh-agent -s)
 exec_always --no-startup-id compton -b --config ~/.config/compton.conf
-exec_always --no-startup-id redshift
 exec_always --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 
 # quickly start a application
 bindsym $mod+Return exec alacritty
 bindsym $mod+b exec firefox
 bindsym $mod+r exec "rofi -i -combi-modi window,drun -show combi -modi combi"
-bindsym $mod+g exec $HOME/.config/i3/rofi/rofi github
-bindsym $mod+c exec $HOME/.config/i3/rofi/rofi circleci
+bindsym $mod+g exec $HOME/.config/i3/rofi/rofi.rb github
+bindsym $mod+c exec $HOME/.config/i3/rofi/rofi.rb circleci
 
 # lock screen
 bindsym $mod+n exec --no-startup-id ~/.config/i3/lock.sh

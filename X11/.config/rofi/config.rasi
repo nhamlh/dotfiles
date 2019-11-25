@@ -1,0 +1,6 @@
+configuration {
+  show-icons: true;
+  theme: "solarized";
+  font: "Source Code Pro 13";
+  columns: 1;
+}
