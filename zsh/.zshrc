@@ -151,6 +151,7 @@ alias em='emacsclient -create-frame --alternate-editor=""'
 alias u="ffsend upload --copy"
 alias dc="docker-compose"
 alias a="asdf"
+alias ls="exa --icons --sort type"
 
 ###
 ### Configurations
@@ -170,9 +171,6 @@ bindkey '\C-x\C-e' edit-command-line
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 setopt interactivecomments
-
-# added by pipsi (https://github.com/mitsuhiko/pipsi)
-export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -82,3 +82,4 @@ function dev() {
   tmux send-key -t 0 "vi" Enter
   tmux select-pane -t 0
 }
+
