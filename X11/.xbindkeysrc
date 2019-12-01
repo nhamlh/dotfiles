@@ -22,6 +22,6 @@
   F7
 
 # Take screenshot, meanwhile copy it to clipboard
-"scrot -s -f -e 'xclip -i $f -selection clipboard -t image/png' ~/Screenshots/screenshot-%Y-%m-%d_$wx$h.png"
+"maim -s -f png | tee "$HOME/Screenshots/screenshot-$(date +%Y-%m-%d-%H:%M:%S.%N).png" | xclip -selection clipboard -t image/png"
   F3
 
