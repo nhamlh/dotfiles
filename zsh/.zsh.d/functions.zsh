@@ -57,13 +57,13 @@ function tmp() {
   while (( $# )); do
     case "$1" in
     "-d")
-      mkdir "/tmp/$2" 2> /dev/null
-      cd "/tmp/$2"
+      mkdir "$HOME/tmp/$2" 2> /dev/null
+      cd "$HOME/tmp/$2"
       shift
       shift
       ;;
     *)
-      $EDITOR "/tmp/$1"
+      $EDITOR "$HOME/tmp/$1"
       shift
     esac
   done

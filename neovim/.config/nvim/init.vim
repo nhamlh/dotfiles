@@ -17,8 +17,8 @@
 syntax on
 filetype plugin indent on
 set nocompatible
-let mapleader=','            " remapping leader key to ,
-let maplocalleader='-'       " remapping leader key to ,
+let mapleader=' '            " remapping leader key to space
+let maplocalleader='-'       " remapping leader key to -
 set mouse=nv                 " Disable mouse in command-line mode
 set modeline                 " automatically setting options from modelines
 set fileformats=unix,dos,mac " Use Unix as the standard file type
@@ -31,7 +31,7 @@ set lazyredraw               " Redraw only when we need to.
 set incsearch                " Search as characters are entered
 set history=2000             " History saving
 set updatetime=100
-"set termguicolors
+set termguicolors
 " }}}
 
 "-----------------------------------------------------------
@@ -55,8 +55,9 @@ highlight CursorLine cterm=underline ctermbg=None ctermfg=None
 set list
 set listchars=tab:▸·,eol:¬,trail:·
 
-" Disable list chars on golang files
-autocmd FileType go set nolist
+" Disable listing tabs on golang files
+"autocmd FileType go set listchars=tab:\¦\ ,eol:¬,trail:·
+
 
 " Display line number
 set relativenumber
@@ -110,17 +111,17 @@ endif
 vnoremap Y "+y
 vnoremap P "+p
 
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-
 " Quickly jump to errors indicated in quickfix window
 nnoremap ef :cnf<CR>
 nnoremap en :cnext<CR>
 nnoremap el :clast<CR>
 nnoremap ep :cprevious<CR>
 
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " Toggle folding with the spacebar
-nnoremap <space> za
+nnoremap <Tab> za
 
 nnoremap <c-o>h :split<CR>
 nnoremap <c-o>v :vsplit<CR>
