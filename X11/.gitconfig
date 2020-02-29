@@ -1,11 +1,11 @@
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore_global
 [user]
-	email = lehoainham@gmail.com
-	name = Nham Le
+  email = lehoainham@gmail.com
+  name = Nham Le
 [github]
-	user = nhamlh
+  user = nhamlh
 [merge]
     tool = vimdiff
 [mergetool]
