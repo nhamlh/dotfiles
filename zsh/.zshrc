@@ -1,35 +1,22 @@
 export TERM=xterm-256color
 export ZSH_CACHE_DIR="/tmp"
 
-# Install zplugin if not installed
+# Install zinit if not installed
 if [ ! -d "${HOME}/.zplugin" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/mod-install.sh)"
 fi
 
-# Load zplugin
-source ~/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+# Load zinit
+source ~/.zplugin/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Functions to make configuration less verbose
-zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
-zi() { zplugin ice lucid                            "${@}"; } # Regular Ice
-z()  { [ -z $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
+zt() { zinit ice wait"${1}" lucid             "${@:2}"; } # Turbo
+z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
 
 # Prompt settings
-zi src"powerlevel10k.zsh-theme"; z romkatv/powerlevel10k
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_MODE='nerdfont-fontconfig'
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir virtualenv rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time custom)
-
-POWERLEVEL9K_COLOR_SCHEME='dark'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%B➤%b "
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='cyan'
-
-#zi pick"async.zsh" src"pure.zsh"; z "sindresorhus/pure"
+z romkatv/powerlevel10k
 
 # Misc plugins
 zt 0b; z "zdharma/fast-syntax-highlighting"
@@ -38,7 +25,7 @@ zt 0b; z "zlsun/solarized-man"
 zt 0b; z "joel-porquet/zsh-dircolors-solarized"
 zt 0b; z "skx/sysadmin-util"
 zt 0b; z "zpm-zsh/ls"
-z "zsh-users/zsh-autosuggestions"
+zt 0b atload"_zsh_autosuggest_start" ; z "zsh-users/zsh-autosuggestions"
 zt 0b; z "hlissner/zsh-autopair"
 zt 0b src"init.sh"; z "b4b4r07/enhancd"
 zt 0b from"gh-r" as"program"; z "dflemstr/rq"
@@ -152,13 +139,14 @@ alias u="ffsend upload --copy"
 alias dc="docker-compose"
 alias a="asdf"
 alias ls="exa --icons --sort type"
+alias cdpr="cd $PROOT"
 
 ###
 ### Configurations
 ###
 
 bindkey -e # Use emacs input mode
-bindkey '^ ' autosuggest-accept
+#bindkey '^ ' autosuggest-accept
 bindkey '\C-h' backward-delete-word
 
 eval $(direnv export zsh)
@@ -176,4 +164,3 @@ setopt interactivecomments
 
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*) source $src
-
