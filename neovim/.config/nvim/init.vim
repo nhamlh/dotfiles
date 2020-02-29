@@ -45,7 +45,7 @@ source ~/.config/nvim/plugins.vim
 " {{{
 "colorscheme solarized
 colorscheme NeoSolarized
-set background=dark
+set background=light
 
 " Highlight current line
 set cursorline
@@ -116,9 +116,6 @@ nnoremap ef :cnf<CR>
 nnoremap en :cnext<CR>
 nnoremap el :clast<CR>
 nnoremap ep :cprevious<CR>
-
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
 
 " Toggle folding with the spacebar
 nnoremap <Tab> za

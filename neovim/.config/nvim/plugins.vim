@@ -275,22 +275,16 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules'
   "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
-  nnoremap \           :Ag<CR>
-  nnoremap <c-p>       :Files<CR>
-  nnoremap <Leader>l   :BLines<CR>
-  nnoremap <Leader>L   :Lines<CR>
-  nnoremap <Leader>t   :BTags<CR>
-  nnoremap <Leader>T   :Tags<CR>
-  nnoremap <Leader>bb  :Buffers<CR>
+  nnoremap \                     :Ag<CR>
+  nnoremap <Leader><space>       :Files<CR>
+  nnoremap <Leader>ss            :BLines<CR>
+  nnoremap <Leader>sp            :Lines<CR>
+  nnoremap <Leader>st            :BTags<CR>
+  nnoremap <Leader>sT            :Tags<CR>
+  nnoremap <Leader>bb            :Buffers<CR>
 
-  nnoremap <c-s>l      :BLines<CR>
-  nnoremap <c-s>L      :Lines<CR>
-  nnoremap <c-s>t      :BTags<CR>
-  nnoremap <c-s>T      :Tags<CR>
-  nnoremap <c-s>b      :Buffers<CR>
-
-  nnoremap <M-x>       :Commands<CR>
-  nnoremap gw          :Windows<CR>
+  nnoremap <M-x>                 :Commands<CR>
+  nnoremap gw                    :Windows<CR>
 
   nnoremap K           :Ag <C-R><C-W><CR>
   "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -334,11 +328,11 @@ Plug 'easymotion/vim-easymotion'
   let g:EasyMotion_smartcase = 1
 
   " quick character navigating
-  nmap gc <Plug>(easymotion-overwin-f)
+  nmap gss <Plug>(easymotion-overwin-f2)
 
   " quick line navigating
-  map gj <Plug>(easymotion-j)
-  map gk <Plug>(easymotion-k)
+  map gsj <Plug>(easymotion-j)
+  map gsk <Plug>(easymotion-k)
 
 "Plug 'mg979/vim-visual-multi'
 "Plug 'terryma/vim-multiple-cursors'
