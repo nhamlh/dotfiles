@@ -9,12 +9,12 @@ export TERM=xterm-256color
 export ZSH_CACHE_DIR="/tmp"
 
 # Install zinit if not installed
-if [ ! -d "${HOME}/.zplugin" ]; then
+if [ ! -d "${HOME}/.zinit" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/mod-install.sh)"
 fi
 
 # Load zinit
-source ~/.zplugin/bin/zinit.zsh
+source ~/.zinit/mod-bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -37,7 +37,7 @@ zt 0b; z "hlissner/zsh-autopair"
 zt 0b src"init.sh"; z "b4b4r07/enhancd"
 zt 0b from"gh-r" as"program"; z "dflemstr/rq"
 zt 0b from"gh-r" pick"*-linux-x64" mv"ffsend-* -> ffsend" as"program";z "timvisee/ffsend"
-zt 0b multisrc"asdf.sh completions/asdf.bash";z "asdf-vm/asdf"
+zt 0b "asdf-vm/asdf"
 
 # Git plugins
 zt 0b; z "Seinh/git-prune"
@@ -155,8 +155,6 @@ alias cdpr="cd $PROOT"
 bindkey -e # Use emacs input mode
 #bindkey '^ ' autosuggest-accept
 bindkey '\C-h' backward-delete-word
-
-eval $(direnv export zsh)
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
