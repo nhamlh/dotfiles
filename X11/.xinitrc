@@ -12,7 +12,7 @@ if [ -f $sysresources ]; then
 fi
 
 # Only run xmodmap when I need to
-if [ -f $sysmodmap && AUTO_XMODMAP -eq 1 ]; then
+if [ -f $sysmodmap ] && [ $AUTO_XMODMAP == "1" ]; then
     xmodmap $sysmodmap
 fi
 
@@ -43,7 +43,8 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 fcitx &
 
-export WINIT_HIDPI_FACTOR="1.66"
+#export WINIT_HIDPI_FACTOR="1.66"
+export WINIT_X11_SCALE_FACTOR="1.55"
 
 #export GDK_SCALE=2
 #export GDK_DPI_SCALE=2
