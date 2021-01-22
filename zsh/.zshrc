@@ -37,7 +37,7 @@ zt 0b; z "hlissner/zsh-autopair"
 zt 0b src"init.sh"; z "b4b4r07/enhancd"
 zt 0b from"gh-r" as"program"; z "dflemstr/rq"
 zt 0b from"gh-r" pick"*-linux-x64" mv"ffsend-* -> ffsend" as"program";z "timvisee/ffsend"
-zt 0b "asdf-vm/asdf"
+z "asdf-vm/asdf"
 
 # Git plugins
 zt 0b; z "Seinh/git-prune"
