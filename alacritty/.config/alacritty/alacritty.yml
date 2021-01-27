@@ -458,15 +458,7 @@ debug:
   persistent_logging: false
 
   # Log level
-  #
-  # Values for `log_level`:
-  #   - None
-  #   - Error
-  #   - Warn
-  #   - Info
-  #   - Debug
-  #   - Trace
-  log_level: None
+  log_level: WARN
 
   # Print all received window events.
   print_events: false
