@@ -129,6 +129,8 @@ export EDITOR=nvim
 export WORDCHARS=''               # Make M-f and M-b work better for me
 export EXTENDEDGLOB=1             # globbing
 
+export BAT_THEME="Solarized (light)"
+
 ###
 ### Aliases
 ###
