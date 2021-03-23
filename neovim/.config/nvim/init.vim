@@ -31,7 +31,7 @@ set lazyredraw               " Redraw only when we need to.
 set incsearch                " Search as characters are entered
 set history=2000             " History saving
 set updatetime=100
-set termguicolors
+"set termguicolors
 " }}}
 
 "-----------------------------------------------------------
