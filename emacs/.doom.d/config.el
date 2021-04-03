@@ -28,17 +28,17 @@
 
   (setq org-todo-keywords
         '((sequence
-           "TODO(t)"  ; A task that needs doing
-           "NEXT(n)"  ; Task need to focus next
-           "STRT(s)"  ; Task is in progress
-           "WAIT(w)"  ; Task is being held up or paused
+           "TODO(t)"                    ; A task that needs doing
+           "NEXT(n)"                    ; Task need to focus next
+           "STRT(s)"                    ; Task is in progress
+           "WAIT(w)"                    ; Task is being held up or paused
            "|"
            "DONE(d)"
            "KILL(k)")
           (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[-](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
+           "[ ](T)"                     ; A task that needs doing
+           "[-](S)"                     ; Task is in progress
+           "[?](W)"                     ; Task is being held up or paused
            "|"
            "[X](D)"))
         org-todo-keyword-faces
@@ -51,6 +51,9 @@
           ("[?]"  . +org-todo-onhold)))
 
   (setq org-agenda-show-all-dates 0)
+  (setq org-clock-in-switch-to-state "STRT")
+  (setq org-clock-out-when-done t)
+  (setq org-log-into-drawer t)
 
   (setq
    org-work-files (list (concat (file-name-as-directory org-directory) "work.org"))
@@ -97,6 +100,13 @@
             (tags-todo "+PRIORITY=\"A\"" ((org-agenda-overriding-header "Important: ")
                           (org-agenda-files org-work-files))))))))
 
+(after! org-roam
+  (setq org-roam-directory org-directory))
+
+(after! org-pomodoro
+  (setq org-pomodoro-length 45))
+
+
 (after! projectile
   ;; Init projectile's search dirs
   (setq projectile-project-search-path (split-string (getenv "EMACS_PROJECTILE_SEARCH_DIRS") ";")))
@@ -138,3 +148,22 @@ then open a new workspace with this new project"
 
 (after! magit
   (set-popup-rule! "^magit:\s" :height 0.5 :side 'bottom :select t :modeline t :quit 'current))
+
+(after! prodigy
+  (set-popup-rule! "^\*prodigy*" :height 0.35 :side 'bottom :select t :modeline t :quit 'current))
+
+;; Smart tab, these will only work in GUI Emacs
+;; https://github.com/hlissner/doom-emacs/commit/b8a3cad295dcbed1e9952db240b7ce05e94dd7ae
+(map! :n [tab] (general-predicate-dispatch nil
+                 (and (featurep! :editor fold)
+                      (save-excursion (end-of-line) (invisible-p (point))))
+                 #'+fold/toggle
+                 (fboundp 'evil-jump-item)
+                 #'evil-jump-item)
+      :v [tab] (general-predicate-dispatch nil
+                 (and (bound-and-true-p yas-minor-mode)
+                      (or (eq evil-visual-selection 'line)
+                          (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                 #'yas-insert-snippet
+                 (fboundp 'evil-jump-item)
+                 #'evil-jump-item))
