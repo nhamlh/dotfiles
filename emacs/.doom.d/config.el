@@ -5,7 +5,7 @@
 
 ;; UI
 (setq doom-font (font-spec :family "Fira Code" :size 18))
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-one-light)
 (setq display-line-numbers-type 'relative)
 ;; Enable modeline for popup windows
 (plist-put +popup-defaults :modeline t)
