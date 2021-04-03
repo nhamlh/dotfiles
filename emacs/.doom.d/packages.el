@@ -3,3 +3,4 @@
 
 (package! auto-dim-other-buffers)
 (package! visual-fill-column)
+(package! org-roam-server)
