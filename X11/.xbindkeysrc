@@ -18,7 +18,7 @@
 "xbacklight -dec 10; notify-send 'brightness down'"
    XF86MonBrightnessDown
 
-"autorandr -c"
+"autorandr horizontal"
   F7
 
 # Take screenshot, meanwhile copy it to clipboard
