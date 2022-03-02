@@ -206,7 +206,8 @@ tmp:
   #  cyan:    '0x93a1a1' # base1
   #  white:   '0xfdf6e3' # base3
 
-background_opacity: 1.0
+window:
+  opacity: 1.0
 
 # Key bindings
 #
