@@ -149,6 +149,11 @@ alias dc="docker-compose"
 alias a="asdf"
 alias ls="exa --icons --sort type"
 alias cdpr="cd $PROOT"
+alias kgpc='kubectl get pod -o=custom-columns="NAME:.metadata.name,STATUS:.status.phase,IP:.status.podIP,NODE:.status.hostIP"'
+alias sd="sudo systemctl"
+
+# kgpn cause inconsistence with other kg* -n aliases like kgd, kgcm, etc.
+unalias kgpn
 
 ###
 ### Configurations
