@@ -12,7 +12,9 @@ gaps outer 1
 new_window none
 for_window [class="^.*"] border pixel 0
 
-for_window [class="keepassxc"] move scratchpad
+for_window [class="KeePassXC"] move scratchpad
+#for_window [class="Alacritty"] move scratchpad
+#for_window [class="Emacs"] move scratchpad
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -146,7 +148,7 @@ mode "resize" {
 workspace 1 output HDMI1
 workspace 2 output HDMI1
 workspace 3 output HDMI1
-workspace 4 output eDP1
+workspace "4 " output eDP1
 workspace 5 output eDP1
 workspace 6 output eDP1
 
@@ -204,13 +206,18 @@ bar {
 ################################################
 
 # startup applications
-exec        --no-startup-id redshift
+exec        --no-startup-id lxpolkit # provided by lxsession
+#exec        --no-startup-id redshift
 exec        --no-startup-id xss-lock .config/i3/lock.sh
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/stay_focused.jpg
 exec_always --no-startup-id eval $(ssh-agent -s)
 exec_always --no-startup-id compton -b --config ~/.config/compton.conf
 exec_always --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+#exec_always --no-startup-id /usr/bin/keepassxc
+
+# disable touchpad
+exec --no-startup-id $HOME/.config/i3/disable-touchpad.sh
 
 # quickly start a application
 bindsym $mod+Return exec alacritty
@@ -218,6 +225,7 @@ bindsym $mod+b exec firefox -P
 bindsym $mod+r exec "rofi -i -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+g exec $HOME/.config/i3/rofi/rofi.rb github
 bindsym $mod+c exec $HOME/.config/i3/rofi/rofi.rb circleci
+bindsym $mod+t exec emacsclient --eval "(emacs-everywhere)"
 
 # lock screen
 bindsym $mod+n exec --no-startup-id ~/.config/i3/lock.sh
