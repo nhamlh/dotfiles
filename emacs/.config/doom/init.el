@@ -43,7 +43,7 @@
        ophints             ; highlight the region an operation acts on
        (popup              ; tame sudden yet inevitable temporary windows
         +all +defaults)
-       tabs                ; a tab bar for Emacs
+       ;;tabs              ; a tab bar for Emacs
        treemacs            ; a project drawer, like neotree but cooler
        unicode             ; extended unicode support for various languages
        vc-gutter           ; vcs diff in the fringe
@@ -137,7 +137,7 @@
        ;;idris             ; a language you can depend on
        ;;json              ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       javascript          ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -152,7 +152,7 @@
        (org                ; organize your plain life in plain text
         +dragndrop
         +pomodoro
-        +roam
+        +roam2
         +present)
        ;;php               ; perl's insecure younger brother
        plantuml            ; diagrams for confusing people more
@@ -172,8 +172,8 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;;web               ; the tubes
-       yaml                ; JSON, but readable
+       web                 ; the tubes
+       (yaml +lsp)         ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email
