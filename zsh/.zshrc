@@ -5,22 +5,28 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load my custom environment variales
+source ~/.envs
+
 export TERM=xterm-256color
-export ZSH_CACHE_DIR="/tmp"
+export ZSH_CACHE_DIR="$HOME/.cache/zsh"
+mkdir -p $ZSH_CACHE_DIR
 
 # Install zinit if not installed
-if [ ! -d "${HOME}/.zinit" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/mod-install.sh)"
+zi_home="${HOME}/.zi"
+if [ ! -d "${zi_home}" ]; then
+  mkdir -p $zi_home
+  git clone https://github.com/z-shell/zi.git "${zi_home}/bin"
 fi
 
 # Load zinit
-source ~/.zinit/mod-bin/zinit.zsh
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+source $zi_home/bin/zi.zsh
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 # Functions to make configuration less verbose
-zt() { zinit ice wait"${1}" lucid             "${@:2}"; } # Turbo
-z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
+zt() { zi ice wait"${1}" lucid             "${@:2}"; } # Turbo
+z()  { [ -z $2 ] && zi light "${@}" || zi "${@}"; } # zplugin
 
 # Prompt settings
 z romkatv/powerlevel10k
@@ -37,6 +43,7 @@ zt 0b; z "hlissner/zsh-autopair"
 zt 0b src"init.sh"; z "b4b4r07/enhancd"
 zt 0b from"gh-r" as"program"; z "dflemstr/rq"
 zt 0b from"gh-r" pick"*-linux-x64" mv"ffsend-* -> ffsend" as"program";z "timvisee/ffsend"
+zt 0b from"gh-r" pick"*_linux_x64" mv"yq_* -> yq" as"program";z "mikefarah/yq"
 z "asdf-vm/asdf"
 
 # Git plugins
@@ -141,6 +148,7 @@ alias df="df -h"
 alias dig="dig +short"
 alias eio="exercism"
 alias tf="terraform"
+alias tg="terragrunt"
 alias ktx="kubectx"
 alias kns="kubens"
 alias em='emacsclient -create-frame --alternate-editor=""'
@@ -172,7 +180,16 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|
 zstyle ':completion:*' menu select
 setopt interactivecomments
 
+#TODO: per-platform config
+# use gnu bins installed by homebrew instead of OSX defaults
+PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+
+# Need to run $(brew --prefix)/opt/fzf/install first
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*.zsh) source $src
+
