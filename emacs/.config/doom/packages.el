@@ -4,6 +4,11 @@
 (package! auto-dim-other-buffers)
 (package! visual-fill-column)
 (package! org-roam-server)
+(package! protobuf-mode)
+(package! ob-mermaid)
+(package! auto-dim-other-buffers)
+(package! cue-mode)
+(package! devdocs)
 
 (unpin! org-roam)
 (package! websocket)

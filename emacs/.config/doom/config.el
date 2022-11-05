@@ -4,24 +4,30 @@
       user-mail-address "lehoainham@gmail.com")
 
 ;; UI
-(setq doom-font (font-spec :family "Fira Code" :size 18))
-(setq doom-theme 'doom-one-light)
+(setq doom-font (font-spec :family "Fira Code" :size 15))
+; (setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-solarized-light)
 (setq display-line-numbers-type 'relative)
 ;; Enable modeline for popup windows
 (plist-put +popup-defaults :modeline t)
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
-;(after! format
-;  (define-format-all-formatter rubocop
-;    (:executable "rubocop")
-;    (:install "gem install rubocop")
-;    (:modes ruby-mode enh-ruby-mode)
+; (after! format
+;  (define-format-all-formatter cue
+;    (:executable "cue")
+;    (:modes cue)
 ;    (:format
 ;      (format-all--buffer-easy
 ;      executable
-;      "-a -F"
 ;      (when (buffer-file-name)
 ;        (list " " (buffer-file-name)))))))
+(set-formatter! 'cue "cue fmt " :modes '(cue-mode))
+
+; open emacs on macOS will result in tiny window without this setting
+(toggle-frame-maximized)
+
+(setq-default eglot-workspace-configuration
+ '((:gopls . ((gofumpt . t)))))
 
 ;; has to be set before org loaded
 (setq org-directory (getenv "EMACS_ORG_DIR"))
@@ -159,6 +165,18 @@
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 
+(use-package! ob-mermaid 
+    :after org
+    :config
+
+    (setq ob-mermaid-cli-path "/opt/homebrew/bin/mmdc")
+
+    (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((mermaid . t)
+      (scheme . t)
+      (your-other-langs . t))))
+
 (after! org-pomodoro
   (setq org-pomodoro-length 45))
 
@@ -196,9 +214,9 @@ It creates a doom popup and focus on it instead of a normal window."
   ;; Init projectile's search dirs
   (setq projectile-project-search-path (split-string (getenv "EMACS_PROJECTILE_SEARCH_DIRS") ";")))
 
-(after! auto-dim-other-buffers
-  ;; Better focusing on current buffer
-  (auto-dim-other-buffers-mode))
+(add-hook 'after-init-hook (lambda ()
+  (when (fboundp 'auto-dim-other-buffers-mode)
+    (auto-dim-other-buffers-mode t))))
 
 (after! ivy
   (setq counsel-projectile-rg-initial-input '(ivy-thing-at-point)))
@@ -213,6 +231,14 @@ It creates a doom popup and focus on it instead of a normal window."
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
 
 ; (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+
+(defun run-projectile-invalidate-cache (&rest _args)
+  ;; We ignore the args to `magit-checkout'.
+  (projectile-invalidate-cache nil))
+(advice-add 'magit-checkout
+            :after #'run-projectile-invalidate-cache)
+(advice-add 'magit-branch-and-checkout ; This is `b c'.
+            :after #'run-projectile-invalidate-cache)
 
 ;; Smart tab, these will only work in GUI Emacs
 ;; https://github.com/hlissner/doom-emacs/commit/b8a3cad295dcbed1e9952db240b7ce05e94dd7ae
