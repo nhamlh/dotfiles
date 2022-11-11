@@ -12,6 +12,8 @@ export TERM=xterm-256color
 export ZSH_CACHE_DIR="$HOME/.cache/zsh"
 mkdir -p $ZSH_CACHE_DIR
 
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
 # Install zinit if not installed
 zi_home="${HOME}/.zi"
 if [ ! -d "${zi_home}" ]; then
@@ -192,4 +194,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Import my own custom zsh customizations
 for src (~/.zsh.d/*.zsh) source $src
+### End of Zinit's installer chunk
 

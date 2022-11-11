@@ -61,7 +61,8 @@ client.placeholder	$foreground	$background	$foreground	$color4		$color4
 ################################################
 
 # kill focuse
-bindsym $mod+Shift+q kill
+#bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -108,7 +109,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Return focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -186,7 +187,7 @@ bindsym $mod+Control+Right focus output right
 ################################################
 bar {
         font pango:Source Code Pro 12
-        height 26
+        height 36
         position top
         status_command i3status-rs ~/.config/i3/i3status-rs.toml
 
@@ -206,10 +207,10 @@ bar {
 ################################################
 
 # startup applications
-exec        --no-startup-id lxpolkit # provided by lxsession
+#exec        --no-startup-id lxpolkit # provided by lxsession
 #exec        --no-startup-id redshift
 exec        --no-startup-id xss-lock .config/i3/lock.sh
-exec_always --no-startup-id nm-applet
+#exec_always --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/.config/i3/wallpapers/stay_focused.jpg
 exec_always --no-startup-id eval $(ssh-agent -s)
 exec_always --no-startup-id compton -b --config ~/.config/compton.conf
@@ -217,12 +218,12 @@ exec_always --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 #exec_always --no-startup-id /usr/bin/keepassxc
 
 # disable touchpad
-exec --no-startup-id $HOME/.config/i3/disable-touchpad.sh
+#exec --no-startup-id $HOME/.config/i3/disable-touchpad.sh
 
 # quickly start a application
-bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec alacritty
 bindsym $mod+b exec firefox -P
-bindsym $mod+r exec "rofi -i -combi-modi window,drun -show combi -modi combi"
+bindsym $mod+space exec "rofi -i -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+g exec $HOME/.config/i3/rofi/rofi.rb github
 bindsym $mod+c exec $HOME/.config/i3/rofi/rofi.rb circleci
 bindsym $mod+t exec emacsclient --eval "(emacs-everywhere)"

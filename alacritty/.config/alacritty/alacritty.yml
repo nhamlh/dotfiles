@@ -63,18 +63,12 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    #family: Source Code Pro
-    #family: FiraCode
-    family: MesloLGS NF
+    family: FiraCode
   bold:
-    #family: Source Code Pro
-    #family: FiraCode
-    family: MesloLGS NF
+    family: FiraCode
   italic:
-    #family: Source Code Pro
-    #family: FiraCode
-    family: MesloLGS NF
-  size: 15.0
+    family: FiraCode
+  size: 12.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
