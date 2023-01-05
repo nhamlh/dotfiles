@@ -1,3 +1,5 @@
+# [ARCHIVED] in favor of my new [system](https://github.com/nhamlh/nix)
+
 # My dotfiles
 
 ## Installation
